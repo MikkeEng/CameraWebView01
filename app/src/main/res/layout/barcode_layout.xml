@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btn_scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:drawableLeft="@drawable/ic_barcode_scan"
+        android:drawableStart="@drawable/ic_barcode_scan"
+        android:drawablePadding="8dp"
+        android:text="Escanear"/>
+
+    <TextView
+        android:id="@+id/txv_format"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textIsSelectable="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_scan"
+        android:text="Aquí se mostrará el formato"/>
+
+    <TextView
+        android:id="@+id/txv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textIsSelectable="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/txv_format"
+        android:text="Aquí se mostrará el código"/>
+
+
+</RelativeLayout>
