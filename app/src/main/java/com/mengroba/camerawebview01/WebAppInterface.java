@@ -41,7 +41,7 @@ public class WebAppInterface {
     }
 
     /**
-     * Muestra un cuadro de dialogo del mensaje pasado por parametro en el HTML     *
+     * Muestra un cuadro de dialogo del mensaje pasado por parametro en el HTML
      * @param msg
      */
     @JavascriptInterface
@@ -72,6 +72,7 @@ public class WebAppInterface {
     public void scanBarcode() {
         //Pasamos a MainActivity el estado correspondiente al escaner de barras
         intent = new Intent(context, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("STATE", STATE_SCAN);
         context.startActivity(intent);
     }
@@ -96,6 +97,7 @@ public class WebAppInterface {
     public void showMap(String lat, String lon) {
         //Pasamos a MainActivity las coordenadas a buscar
         intent = new Intent(context, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("STATE", STATE_MAP);
         intent.putExtra("COORD", URLMAP1 + lat + 0 + lon + 0 + URLMAP2 + lat + "," + lon);
         context.startActivity(intent);

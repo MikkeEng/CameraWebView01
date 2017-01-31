@@ -107,7 +107,8 @@ public class MainActivity extends AppCompatActivity {
                 url = getIntent().getStringExtra("COORD");
                 webView.loadUrl(url);
                 break;
-            //Si se ha pulsado el boton de mapa
+            /*Si se ha pulsado el boton de escanear codigo de barras, se hace uso de la
+            libreria zxing para lanzar el escaner*/
             case STATE_SCAN:
                 new ZxingOrient(MainActivity.this).initiateScan();
                 break;
@@ -115,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
                 webView.loadUrl(webViewUrl);
                 break;
         }
-
         // definimos el navegador
         startWebView();
 
@@ -159,8 +159,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /* Definimos una clase interna WebChrome Client y un metodo openFileChooser para
-         seleccionar un archivo desde la aplicacion de camara o del almacenamiento.*/
+        /**
+         * Definimos una clase interna WebChrome Client y un metodo openFileChooser para
+         * seleccionar un archivo desde la aplicacion de camara o del almacenamiento.
+         */
         webView.setWebChromeClient(new WebChromeClient() {
 
             /**
@@ -181,8 +183,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            /*Metodos si queremos saber el tiempo de carga de la web
-            /*@Override
+            /*Metodos si queremos saber el tiempo de carga de la web/*
+            @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
 
@@ -336,19 +338,24 @@ public class MainActivity extends AppCompatActivity {
             //Cargamos la libreria Zxing a traves de scanResult y parseamos el resultado
             ZxingOrientResult scanResult = ZxingOrient.parseActivityResult(requestCode, resultCode, intent);
             if (scanResult != null && scanResult.getContents() != null) {
-                /*Pasamos la informacion al usuario, para ello usamos un dialogo emergente*/
+                //Pasamos la informacion al usuario, para ello usamos un dialogo emergente
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage("El formato es: " + scanResult.getFormatName() + "\n" +
-                        "él codigo es: " + scanResult.getContents())
+                        "y el codigo es: " + scanResult.getContents())
                         .setNeutralButton("Aceptar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.dismiss();
+                                finish();
                             }
                         });
                 //Creamos el dialogo
                 builder.create().show();
-
+                /*Toast.makeText(this, "El formato es: " + scanResult.getFormatName() + "\n" +
+                        "y el codigo es: " + scanResult.getContents(), Toast.LENGTH_LONG).show();*/
+                url = "javascript:scanBarcodeResult(\"" + scanResult.getContents() + "\")";
+                webView.loadUrl(url);
+                startWebView();
             }
         }
     }
