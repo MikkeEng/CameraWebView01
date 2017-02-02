@@ -3,9 +3,12 @@ package com.mengroba.camerawebview01;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Parcelable;
 import android.provider.MediaStore;
@@ -14,6 +17,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.ConsoleMessage;
+import android.webkit.PermissionRequest;
 import android.webkit.ValueCallback;
 import android.webkit.GeolocationPermissions;
 import android.webkit.WebChromeClient;
@@ -35,6 +39,9 @@ import me.sudar.zxingorient.ZxingOrient;
 import me.sudar.zxingorient.ZxingOrientResult;
 
 
+/**
+ * Clase principal de proyecto
+ */
 public class MainActivity extends AppCompatActivity {
 
     //TAG para el Log Info
@@ -43,8 +50,11 @@ public class MainActivity extends AppCompatActivity {
     private static final int STATE_SEARCH = 1;
     private static final int STATE_MAP = 2;
     private static final int STATE_SCAN = 3;
+    private static final int STATE_CAMERA = 4;
+    private static final int REQUEST_IMAGE_CAPTURE = 5;
+    private static final String WEB_HOME= "file:///android_asset/prueba.html";
 
-    private WebView webView;
+    public WebView webView;
     private ProgressBar progressBar;
     private int state;
     public long loadTime; //indica el tiempo de carga de la pagina
@@ -52,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
     //creamos la constante de direccion web
     //Prueba: private static final String URL_WEB = "http://www.google.es";
     private String url;
+    private String scanContentResut;
+    private String scanFormatResut;
 
     private static final int FILECHOOSER_RESULTCODE = 100;
     private static final int BARCODE_RESULTCODE = 49374;
@@ -63,39 +75,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //fijamos el layout a utilizar
         setContentView(R.layout.activity_main);
-
-        //Enlazamos los elementos graficos
-        webView = (WebView) findViewById(R.id.webView1);
-        progressBar = (ProgressBar) findViewById(R.id.progressbar);
-
-        // Definimos la url de inicio, dentro de la carpeta assets
-        String webViewUrl = "file:///android_asset/prueba.html";
-
-        //Enlazamos WebAppInterface entre el codigo JavaScript y el codigo Android
-        webView.addJavascriptInterface(new WebAppInterface(this), "Android");
-
-        //Accedemos a la configuracion del WebView y habilitamos el javascript
-        webView.getSettings().setJavaScriptEnabled(true);
-
-        // Ajustamos el HTML al WebView
-        webView.getSettings().setLoadWithOverviewMode(true);
-        //añadimos scroll
-        webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
-        webView.setScrollbarFadingEnabled(false);
-        //habilitamos las opciones de zoom
-        webView.getSettings().setSupportZoom(true);
-        webView.getSettings().setBuiltInZoomControls(true);
-        //Si queremos habilitar plugins al WebView (no se recomienda por seguridad)
-        //webView.getSettings().setPluginState(WebSettings.PluginState.OFF);
-        //habilitamos el tratamiento de ficheros
-        webView.getSettings().setAllowFileAccess(true);
-
+        //creamos el visor HTML
+        createWebView(this);
         //Cargamos el WebView segun las elecciones en el HTML
         //Por defecto se cargaria siempre la pagina principal
         state = getIntent().getIntExtra("STATE", STATE_HOMEPAGE);
         switch (state) {
             case STATE_HOMEPAGE:
-                webView.loadUrl(webViewUrl);
+                webView.loadUrl(WEB_HOME);
+                break;
+            //Si se ha pulsado el boton de busqueda
+            case STATE_CAMERA:
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+                finish();
                 break;
             //Si se ha pulsado el boton de busqueda
             case STATE_SEARCH:
@@ -110,25 +105,65 @@ public class MainActivity extends AppCompatActivity {
             /*Si se ha pulsado el boton de escanear codigo de barras, se hace uso de la
             libreria zxing para lanzar el escaner*/
             case STATE_SCAN:
-                new ZxingOrient(MainActivity.this).initiateScan();
+                //TODO: Cambiar la libreria de Zxing por la propia barcodescan para poder modificar la libreria
+                new ZxingOrient(MainActivity.this).setBeep(true).initiateScan();
                 break;
             default:
-                webView.loadUrl(webViewUrl);
+                webView.loadUrl(WEB_HOME);
                 break;
-        }
-        // definimos el navegador
+        } //Fin del switch
+
+        // definimos el visor HTML
         startWebView();
 
     }
 
     /**
-     * Creamos un cliente de WebView que es llamado al abrir la url     *
+     * Creamos el visor WebView para cargar el HTML
+     */
+    private void createWebView(Context context){
+
+        //Enlazamos los elementos graficos
+        webView = (WebView) findViewById(R.id.webView1);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        //Enlazamos WebAppInterface entre el codigo JavaScript y el codigo Android
+        webView.addJavascriptInterface(new WebAppInterface(this), "Android");
+        //Accedemos a la configuracion del WebView y habilitamos el javascript
+        webView.getSettings().setJavaScriptEnabled(true);
+        // Ajustamos el HTML al WebView
+        webView.getSettings().setLoadWithOverviewMode(true);
+        //añadimos scroll
+        webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        webView.setScrollbarFadingEnabled(false);
+        //habilitamos las opciones de zoom
+        webView.getSettings().setSupportZoom(true);
+        webView.getSettings().setBuiltInZoomControls(true);
+        //Si queremos habilitar plugins al WebView (no se recomienda por seguridad)
+        //webView.getSettings().setPluginState(WebSettings.PluginState.OFF);
+        //habilitamos el tratamiento de ficheros
+        webView.getSettings().setAllowFileAccess(true);
+    }
+
+    /**
+     * Iniciamos un cliente de WebView que es llamado al abrir el HTML
      */
     private void startWebView() {
 
         // Accedemos al WebClient como clase interna
         webView.setWebViewClient(new WebViewClient() {
+
             ProgressDialog progressDialog;
+
+            /**
+             * Metodo sobreescrito para probar el envio de parametros Android->Javascript
+             * @param view
+             * @param url
+             */
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                String prueba = "Escaner Codigo de Barras";
+                view.loadUrl("javascript:scanBarcodeResult(\""+prueba+"\")");
+            }
 
             /**
              * Sobreescribimos el metodo shouldOverrideUrlLoading para editar el comportamiento
@@ -157,13 +192,21 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
-        });
+        });  //Fin del WebClient
 
         /**
          * Definimos una clase interna WebChrome Client y un metodo openFileChooser para
          * seleccionar un archivo desde la aplicacion de camara o del almacenamiento.
          */
         webView.setWebChromeClient(new WebChromeClient() {
+
+            @Override
+            public void onPermissionRequest(PermissionRequest request) {
+                Log.i(TAG, "onPermissionRequest");
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    request.grant(request.getResources());
+                }
+            }
 
             /**
              * Mostrar la carga de la pagina web
@@ -311,9 +354,10 @@ public class MainActivity extends AppCompatActivity {
      * @param intent
      */
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+    protected void onActivityResult(int requestCode, int resultCode, final Intent intent) {
+
         //requestCode correspondiente a la camara
-        if (requestCode == FILECHOOSER_RESULTCODE) {
+        if (requestCode == FILECHOOSER_RESULTCODE || requestCode == REQUEST_IMAGE_CAPTURE) {
             if (this.mUploadMessage == null) {
                 return;
             }
@@ -337,11 +381,21 @@ public class MainActivity extends AppCompatActivity {
         } else if (requestCode == BARCODE_RESULTCODE) {
             //Cargamos la libreria Zxing a traves de scanResult y parseamos el resultado
             ZxingOrientResult scanResult = ZxingOrient.parseActivityResult(requestCode, resultCode, intent);
-            if (scanResult != null && scanResult.getContents() != null) {
+            scanFormatResut = scanResult.getFormatName();
+            scanContentResut = scanResult.getContents();
+            Log.i(TAG, "onActivityResult" + scanFormatResut);
+            Log.i(TAG, "onActivityResult" + scanContentResut);
+            if (scanResult.getContents() != null) {
+                //creamos el visor HTML
+                //createWebView(this);
+                //webView.loadUrl("https://www.google.es");
+                webView.loadUrl("javascript:scanResult(\""+scanContentResut+"\")");
+                /*System.out.println(scanContentResut);
+                System.out.println(scanFormatResut);*/
                 //Pasamos la informacion al usuario, para ello usamos un dialogo emergente
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("El formato es: " + scanResult.getFormatName() + "\n" +
-                        "y el codigo es: " + scanResult.getContents())
+                builder.setMessage("El formato es: " + scanFormatResut + "\n" +
+                        "y el codigo es: " + scanContentResut)
                         .setNeutralButton("Aceptar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
@@ -353,11 +407,17 @@ public class MainActivity extends AppCompatActivity {
                 builder.create().show();
                 /*Toast.makeText(this, "El formato es: " + scanResult.getFormatName() + "\n" +
                         "y el codigo es: " + scanResult.getContents(), Toast.LENGTH_LONG).show();*/
-                url = "javascript:scanBarcodeResult(\"" + scanResult.getContents() + "\")";
-                webView.loadUrl(url);
-                startWebView();
+                //TODO: Conseguir pasar el valor del codigo al campo de texto id_scan en el WebView
+                /*webView.setWebViewClient(new WebViewClient(){
+                    @Override
+                    public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                        view.loadUrl("javascript:scanBarcodeResult(\""+scanContentResut+"\")");
+                    }
+                });*/
             }
         }
+
+
     }
 
     /**

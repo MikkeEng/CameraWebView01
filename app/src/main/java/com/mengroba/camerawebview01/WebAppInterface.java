@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.provider.MediaStore;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.Toast;
@@ -12,7 +13,10 @@ import com.mengroba.camerawebview01.MainActivity;
 
 import java.net.URISyntaxException;
 
+import me.sudar.zxingorient.ZxingOrient;
+
 import static android.content.Intent.getIntent;
+import static android.content.Intent.makeMainActivity;
 
 /**
  * Created by mengroba on 25/01/2017.
@@ -28,8 +32,8 @@ public class WebAppInterface {
     private static final int STATE_SEARCH = 1;
     private static final int STATE_MAP = 2;
     private static final int STATE_SCAN = 3;
+    private static final int STATE_CAMERA = 4;
     private Intent intent;
-    private WebView webView2;
 
     /**
      * Constructor de la clase WebAppInterface
@@ -38,6 +42,18 @@ public class WebAppInterface {
      */
     public WebAppInterface(Context context) {
         this.context = context;
+    }
+
+    /**
+     * Accedemos al modulo de apertura de camara
+     */
+    @JavascriptInterface
+    public void openCameraFile() {
+        //Pasamos a MainActivity el estado correspondiente a captura de camara
+        intent = new Intent(context, MainActivity.class);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("STATE", STATE_CAMERA);
+        context.startActivity(intent);
     }
 
     /**
@@ -62,6 +78,7 @@ public class WebAppInterface {
      * Creamos un Toast con el mensaje pasado por parametro en el HTML     *
      * @param msg
      */
+    @JavascriptInterface
     public void makeToastAndroid(String msg) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
@@ -69,6 +86,7 @@ public class WebAppInterface {
     /**
      * Accedemos al modulo de captura de codigo de barras
      */
+    @JavascriptInterface
     public void scanBarcode() {
         //Pasamos a MainActivity el estado correspondiente al escaner de barras
         intent = new Intent(context, MainActivity.class);
@@ -81,6 +99,7 @@ public class WebAppInterface {
      * Metodo que lanza el buscador cuando se presiona el boton correspondiente en el HTML     *
      * @param texto
      */
+    @JavascriptInterface
     public void showWebPage(String texto) {
         //Pasamos a MainActivity el texto a buscar
         intent = new Intent(context, MainActivity.class);
@@ -94,6 +113,7 @@ public class WebAppInterface {
      * @param lat
      * @param lon
      */
+    @JavascriptInterface
     public void showMap(String lat, String lon) {
         //Pasamos a MainActivity las coordenadas a buscar
         intent = new Intent(context, MainActivity.class);

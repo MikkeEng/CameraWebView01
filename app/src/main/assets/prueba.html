@@ -1,100 +1,112 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
-    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
-</head>
-<body>
+    <head>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+        <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+    </head>
+    <body>
 
-<div data-role="page" id="pageone">
-    <div data-role="header">
-        <h1>PRUEBA</h1>
-    </div>
-
-    <div data-role="content">
-        <form name="form1" method="get" action="">
-
-            <div data-role="fieldcontain">
-                <label for="id_file">Abrir archivo o utilizar la camara.</label>
-                <input type="file" name="text_file" id="id_file"/>
-            </div>
-            <div data-role="fieldcontain">
-                <label for="id_text">Prueba campo de texto</label>
-                <input type="search" name="text_name" id="id_text" value=""
-                       placeholder="Escribe algo">
-                <input name="btn_search" type="button" value="Abrir buscador" id="btnSearch"
-                       onclick="showWebPage()"/>
-            </div>
-            <div data-role="fieldcontain">
-                <label for="id_text">Scanner codigo de barras</label>
-                <input type="text" name="text_scan" id="id_scan" value="Aqui se mostrara el codigo"/>
-                <input type="button" value="Prueba Scanner" id="id_button1"
-                       onclick="scanBarcode()"/>
-                       <!--onFocus="barcodeScan()"-->
-            </div>
-            <div data-role="fieldcontain">
-                <label for="id_text">Prueba mapa GPS</label>
-                <input type="search" name="text_lat" id="id_lat" value=""
-                       placeholder="Ej: 43.362967">
-                <input type="search" name="text_long" id="id_long" value=""
-                       placeholder="Ej: -8.440919">
-                <input name="btn_search" type="button" value="Buscar coordenadas" id="btnCoord"
-                       onclick="showMaps()"/>
+        <div data-role="page" id="pageone">
+            <div data-role="header">
+                <h1>PRUEBA</h1>
             </div>
 
-            <div data-role="fieldcontain">
-                <input type="button" value="Prueba boton 2 HTML" id="id_button2"
-                       onclick="showAndroidToast('Respuesta Toast Android')"/>
+            <div data-role="content">
+                <form name="form1" method="get" action="">
+
+                    <div data-role="fieldcontain">
+                        <label for="id_fileBtn">Utilizar la camara.</label>
+                        <!--<input type="file" name="text_file" id="id_file"/>-->
+                        <!--<input type="file" name="file" id="id_file" accept="image/*" capture>-->
+                        <!--<input type="file" name="file" id="id_file" accept="image/*" capture="camera">-->
+                        <input name="btn_search" type="button" value="(>API 21) Abrir camara" id="id_fileBtn"
+                               onclick="openCameraFile()"/>
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="id_text">Prueba campo de texto</label>
+                        <input type="search" name="text_name" id="id_text" value=""
+                               placeholder="Escribe algo">
+                        <input name="btn_search" type="button" value="Abrir buscador" id="btnSearch"
+                               onclick="showWebPage()"/>
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="id_text" id="title_scan">Scanner codigo de barras</label>
+                        <input type="text" name="text_scan" id="id_scan"
+                               value="Foco aqui para iniciar" onfocus="autoFocusScan()"/>
+                        <input type="button" value="Escanear" id="id_button1" onclick="scanBarcode()"/>
+
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="id_text">Prueba mapa GPS</label>
+                        <input type="search" name="text_lat" id="id_lat" value=""
+                               placeholder="Ej: 43.362967">
+                        <input type="search" name="text_long" id="id_long" value=""
+                               placeholder="Ej: -8.440919">
+                        <input name="btn_search" type="button" value="Buscar coordenadas" id="btnCoord"
+                               onclick="showMaps()"/>
+                    </div>
+
+                    <div data-role="fieldcontain">
+                        <input type="button" value="Prueba boton 2 HTML" id="id_button2"
+                               onclick="showAndroidToast('Respuesta Toast Android')"/>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-</div>
+        </div>
 
-<script type="text/javascript">
-        function barcodeScan(){
-        if(!("autofocus" in document.createElement("input")))
-            document.getElementById("id_scan").focus();
-            Android.scanBarcode();
-        }
-</script>
+        <script type="text/javascript">
 
-<script type="text/javascript">
-        function showWebPage() {
-            texto = document.form1.text_name.value
-            Android.showWebPage(texto);
-        }
+            function showWebPage() {
+                texto = document.form1.text_name.value
+                Android.showWebPage(texto);
+            }
 
-</script>
+            function openCameraFile() {
+                Android.openCameraFile();
+            }
 
-<script type="text/javascript">
+            function showMaps() {
+                lat = document.form1.text_lat.value
+                lon = document.form1.text_long.value
+                if((lat == "") || (lon == ""))
+                    lat = "43.362967"
+                    lon = "-8.440919"
+                Android.showMap(lat, lon);
+            }
 
-        function showMaps() {
-            lat = document.form1.text_lat.value
-            lon = document.form1.text_long.value
-            if((lat == "") || (lon == ""))
-                lat = "43.362967"
-                lon = "-8.440919"
-            Android.showMap(lat, lon);
-        }
+            function scanBarcode() {
+                Android.scanBarcode();
+            }
 
-        function showAndroidDialog(message) {
-            Android.showDialog(message);
-        }
+            function scanBarcodeResult(codigo) {
+                alert("-- " + codigo + " -- ");
+                document.getElementById("id_scan").value = codigo;
+            }
 
-        function scanBarcode() {
-            Android.scanBarcode();
-        }
+            function scanResult(codigo) {
+                document.getElementById("title_scan").innerHTML = codigo;
+                document.getElementById("title_scan").value = codigo;
+                alert("-- " + codigo + " --");
+            }
 
-        function scanBarcodeResult(codigo) {
-            document.getElementById("id_scan").innerHTML = codigo;
-        }
+            function showAndroidDialog(message) {
+                Android.showDialog(message);
+            }
 
-        function showAndroidToast(message) {
-            Android.makeToastAndroid(message);
-        }
+            function showAndroidToast(message) {
+                Android.makeToastAndroid(message);
+            }
 
-</script>
+            function autoFocusScan(){
+            if(!("autofocus" in document.createElement("input")))
+                document.getElementById("id_scan").focus();
+                Android.scanBarcode();
+            }
 
-</body>
+            $.mobile.pushStateEnabled = false;
+
+        </script>
+
+    </body>
 </html>
