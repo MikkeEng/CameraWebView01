@@ -389,18 +389,22 @@ public class MainActivity extends AppCompatActivity {
                 //creamos el visor HTML
                 //createWebView(this);
                 //webView.loadUrl("https://www.google.es");
+                webView.loadUrl("javascript:alert(\"Dialog HTML: \n El formato es "+scanFormatResut+"\n" +
+                        " y el codigo es: " + scanContentResut+"\")");
                 webView.loadUrl("javascript:scanResult(\""+scanContentResut+"\")");
+                /*"javascript:alert('Dialog HTML: \n El formato es '+scanFormatResut+'\n' +
+                ' y el codigo es: ' + scanContentResut+"\")"*/
                 /*System.out.println(scanContentResut);
                 System.out.println(scanFormatResut);*/
                 //Pasamos la informacion al usuario, para ello usamos un dialogo emergente
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("El formato es: " + scanFormatResut + "\n" +
+                builder.setMessage("Dialog Android:" + "\n" + "El formato es: " + scanFormatResut + "\n" +
                         "y el codigo es: " + scanContentResut)
                         .setNeutralButton("Aceptar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.dismiss();
-                                finish();
+                                finish();  //Este finish es para cerrar la Activity generada por el scanner
                             }
                         });
                 //Creamos el dialogo
