@@ -6,7 +6,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -30,13 +29,14 @@ import android.widget.Toast;
 import java.io.File;
 //Imports para saber el tiempo de carga de la pagina
 //import android.graphics.Bitmap;
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 import me.sudar.zxingorient.ZxingOrient;
 import me.sudar.zxingorient.ZxingOrientResult;
+
+import com.mengroba.lib_barcodescanner.*;   //----> !! No se carga...!!
 
 
 /**
@@ -54,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE_CAPTURE = 5;
     private static final String WEB_HOME= "file:///android_asset/prueba.html";
 
+    private static final int FILECHOOSER_RESULTCODE = 100;
+    private static final int BARCODE_RESULTCODE = 49374;
+
     public WebView webView;
     private ProgressBar progressBar;
     private int state;
@@ -64,9 +67,6 @@ public class MainActivity extends AppCompatActivity {
     private String url;
     private String scanContentResut;
     private String scanFormatResut;
-
-    private static final int FILECHOOSER_RESULTCODE = 100;
-    private static final int BARCODE_RESULTCODE = 49374;
     private Uri mCapturedImageURI = null;
     private ValueCallback<Uri> mUploadMessage;
 
@@ -386,16 +386,11 @@ public class MainActivity extends AppCompatActivity {
             Log.i(TAG, "onActivityResult" + scanFormatResut);
             Log.i(TAG, "onActivityResult" + scanContentResut);
             if (scanResult.getContents() != null) {
-                //creamos el visor HTML
-                //createWebView(this);
                 //webView.loadUrl("https://www.google.es");
                 webView.loadUrl("javascript:alert(\"Dialog HTML: \n El formato es "+scanFormatResut+"\n" +
                         " y el codigo es: " + scanContentResut+"\")");
-                webView.loadUrl("javascript:scanResult(\""+scanContentResut+"\")");
-                /*"javascript:alert('Dialog HTML: \n El formato es '+scanFormatResut+'\n' +
-                ' y el codigo es: ' + scanContentResut+"\")"*/
-                /*System.out.println(scanContentResut);
-                System.out.println(scanFormatResut);*/
+                //TODO: Conseguir ejecutar la funcion scanResult en el HTML
+                webView.loadUrl("javascript:scanResult(\"Prueba\")");   //---->!! No hace nada !!
                 //Pasamos la informacion al usuario, para ello usamos un dialogo emergente
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage("Dialog Android:" + "\n" + "El formato es: " + scanFormatResut + "\n" +
@@ -411,13 +406,6 @@ public class MainActivity extends AppCompatActivity {
                 builder.create().show();
                 /*Toast.makeText(this, "El formato es: " + scanResult.getFormatName() + "\n" +
                         "y el codigo es: " + scanResult.getContents(), Toast.LENGTH_LONG).show();*/
-                //TODO: Conseguir pasar el valor del codigo al campo de texto id_scan en el WebView
-                /*webView.setWebViewClient(new WebViewClient(){
-                    @Override
-                    public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                        view.loadUrl("javascript:scanBarcodeResult(\""+scanContentResut+"\")");
-                    }
-                });*/
             }
         }
 
