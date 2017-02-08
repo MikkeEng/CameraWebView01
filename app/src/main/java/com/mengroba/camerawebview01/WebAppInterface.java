@@ -75,6 +75,35 @@ public class WebAppInterface {
     }
 
     /**
+     * Muestra un cuadro de dialogo del mensaje pasado por parametro en el HTML
+     * @param msg
+     */
+    @JavascriptInterface
+    public void showScanCode(String msg) {
+        //Usamos una clase Builder para la construccion del dialogo
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
+        builder
+                .setMessage("El codigo es: " + msg)
+                .setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(context, "Guardando codigo", Toast.LENGTH_LONG).show();
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(context, "Cancelando operación...", Toast.LENGTH_LONG).show();
+                        dialog.dismiss();
+                    }
+                });
+
+        //Creamos el dialogo
+        builder.create().show();
+    }
+
+    /**
      * Creamos un Toast con el mensaje pasado por parametro en el HTML     *
      * @param msg
      */

@@ -392,8 +392,6 @@ public class MainActivity extends AppCompatActivity {
                 webView.loadUrl("javascript:alert(\"Dialog HTML: \n El formato es "+scanFormatResut+"\n" +
                         " y el codigo es: " + scanContentResut+"\")");
                 webView.loadUrl("javascript:scanResult(\""+scanContentResut+"\")");
-                /*"javascript:alert('Dialog HTML: \n El formato es '+scanFormatResut+'\n' +
-                ' y el codigo es: ' + scanContentResut+"\")"*/
                 /*System.out.println(scanContentResut);
                 System.out.println(scanFormatResut);*/
                 //Pasamos la informacion al usuario, para ello usamos un dialogo emergente
@@ -409,15 +407,11 @@ public class MainActivity extends AppCompatActivity {
                         });
                 //Creamos el dialogo
                 builder.create().show();
-                /*Toast.makeText(this, "El formato es: " + scanResult.getFormatName() + "\n" +
-                        "y el codigo es: " + scanResult.getContents(), Toast.LENGTH_LONG).show();*/
                 //TODO: Conseguir pasar el valor del codigo al campo de texto id_scan en el WebView
-                /*webView.setWebViewClient(new WebViewClient(){
-                    @Override
-                    public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                        view.loadUrl("javascript:scanBarcodeResult(\""+scanContentResut+"\")");
-                    }
-                });*/
+
+            } else {
+                Toast.makeText(this, "No se ha obtenido ningun dato", Toast.LENGTH_SHORT).show();
+                finish();
             }
         }
 
