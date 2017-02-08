@@ -22,6 +22,10 @@ import static android.content.Intent.makeMainActivity;
  * Created by mengroba on 25/01/2017.
  */
 
+/**
+ * Clase que hace de Interface entre Android y JavaScript, agrupando los metodos/funciones entre
+ * ambas.
+ */
 public class WebAppInterface {
 
     private Context context;
