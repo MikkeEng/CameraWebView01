@@ -8,12 +8,12 @@
         "source": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\select_dialog_item_material.xml"
     },
     {
-        "merged": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view_list_item.xml",
-        "source": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_activity_chooser_view_list_item.xml"
-    },
-    {
         "merged": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\res\\merged\\release\\layout\\notification_template_big_media.xml",
         "source": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\notification_template_big_media.xml"
+    },
+    {
+        "merged": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\res\\merged\\release\\layout\\abc_activity_chooser_view_list_item.xml",
+        "source": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\layout\\abc_activity_chooser_view_list_item.xml"
     },
     {
         "merged": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\res\\merged\\release\\layout\\abc_alert_dialog_button_bar_material.xml",

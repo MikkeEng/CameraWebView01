@@ -159,7 +159,7 @@
                 android:id="@+id/btn_cancelScan"
                 android:background="@color/actionbar_bg"
                 android:textColor="@color/status_text"
-                android:text="@string/custom_cancel_button"/>
+                android:text="@string/custom_cancel_button" />
 
             <TextView
                 android:id="@+id/info"

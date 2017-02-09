@@ -36,12 +36,12 @@
         "source": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\drawable-xxxhdpi-v4\\abc_ic_star_black_16dp.png"
     },
     {
-        "merged": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png",
-        "source": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\drawable-xxxhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
-    },
-    {
         "merged": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png",
         "source": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\drawable-xxxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png"
+    },
+    {
+        "merged": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png",
+        "source": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\drawable-xxxhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
     },
     {
         "merged": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4\\abc_ic_star_black_36dp.png",

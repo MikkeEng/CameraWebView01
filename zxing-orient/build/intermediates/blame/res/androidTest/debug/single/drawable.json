@@ -88,12 +88,12 @@
         "source": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\drawable\\abc_ic_menu_overflow_material.xml"
     },
     {
-        "merged": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_list_selector_background_transition_holo_light.xml",
-        "source": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\drawable\\abc_list_selector_background_transition_holo_light.xml"
-    },
-    {
         "merged": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\share_via_barcode.png",
         "source": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\bundles\\debug\\res\\drawable\\share_via_barcode.png"
+    },
+    {
+        "merged": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_list_selector_background_transition_holo_light.xml",
+        "source": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.0\\res\\drawable\\abc_list_selector_background_transition_holo_light.xml"
     },
     {
         "merged": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_edit_text_material.xml",

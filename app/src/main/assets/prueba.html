@@ -79,7 +79,7 @@
                        onclick="scanBarcode()"/>
                 <input type="button" value="Aceptar código" id="id_aceptar"
                        onclick="dialogScanCode()"/>
-                <p id="key">Teclado seleccionado: </p>
+                <p id="key">Teclado de letras seleccionado </p>
             </div>
 
             <!--<div data-role="fieldcontain">
@@ -133,16 +133,27 @@
 			}
 			
             function keySwitch() {
-				if(document.querySelector(".number")){
-				document.getElementById("id_btnKey").value = "Teclado de numeros";
-				document.getElementById("id_keytext").classList.remove("number");
+				if(document.querySelector(".scan_number")){
+				document.getElementById("id_keytext").classList.remove("scan_number");
 				document.getElementById("id_keytext").type = "text";
-                document.getElementById("key").innerHTML = "Teclado de letras";
+                document.getElementById("key").innerHTML = "Teclado de letras seleccionado";
+				}else if(document.querySelector(".text")){
+				document.getElementById("id_keytext").classList.remove("text");
+				document.getElementById("id_keytext").classList.add("number");
+				document.getElementById("id_keytext").type = "number";
+                document.getElementById("key").innerHTML = "Teclado de numeros seleccionado";
+				}else if(document.querySelector(".number")){
+				document.getElementById("id_keytext").classList.remove("number");
+				document.getElementById("id_keytext").classList.add("scan_number");
+				document.getElementById("id_keytext").type = "number";
+                document.getElementById("key").innerHTML = "Escanea el codigo";
+                scanBarcode();
 				}else{
-				document.getElementById("id_btnKey").value = "Teclado de letras";
-				document.getElementById("id_keytext").classList.add("number");  
-				document.getElementById("id_keytext").type = "number"; 
-                document.getElementById("key").innerHTML = "Teclado de numeros";
+				document.getElementById("id_keytext").classList.remove("scan_number");
+				document.getElementById("id_keytext").classList.remove("number");
+				document.getElementById("id_keytext").classList.add("number");
+				document.getElementById("id_keytext").type = "number";
+                document.getElementById("key").innerHTML = "Teclado de numeros seleccionado";
 				}
             }
 

@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="http://schemas.android.com/tools">
     <string-array name="country_codes" ns1:ignore="MissingTranslation">
-    <item>-</item>
-    <item>AR</item>
-    <item>AU</item>
-    <item>BR</item>
-    <item>BG</item>
-    <item>CA</item>
-    <item>CH</item>
-    <item>CN</item>
-    <item>CZ</item>
-    <item>DE</item>
-    <item>DK</item>
-    <item>ES</item>
-    <item>FI</item>
-    <item>FR</item>
-    <item>GB</item>
-    <item>GR</item>
-    <item>HU</item>
-    <item>ID</item>
-    <item>IT</item>
-    <item>JP</item>
-    <item>KR</item>
-    <item>NL</item>
-    <item>PL</item>
-    <item>PT</item>
-    <item>RO</item>    
-    <item>RU</item>
-    <item>SE</item>
-    <item>SK</item>
-    <item>SI</item>
-    <item>TR</item>
-    <item>TW</item>
-    <item>US</item>
-  </string-array>
+        <item>-</item>
+        <item>AR</item>
+        <item>AU</item>
+        <item>BR</item>
+        <item>BG</item>
+        <item>CA</item>
+        <item>CH</item>
+        <item>CN</item>
+        <item>CZ</item>
+        <item>DE</item>
+        <item>DK</item>
+        <item>ES</item>
+        <item>FI</item>
+        <item>FR</item>
+        <item>GB</item>
+        <item>GR</item>
+        <item>HU</item>
+        <item>ID</item>
+        <item>IT</item>
+        <item>JP</item>
+        <item>KR</item>
+        <item>NL</item>
+        <item>PL</item>
+        <item>PT</item>
+        <item>RO</item>
+        <item>RU</item>
+        <item>SE</item>
+        <item>SK</item>
+        <item>SI</item>
+        <item>TR</item>
+        <item>TW</item>
+        <item>US</item>
+    </string-array>
     <string-array name="preferences_front_light_options">
-    <item>@string/preferences_front_light_on</item>
-    <item>@string/preferences_front_light_auto</item>
-    <item>@string/preferences_front_light_off</item>
-  </string-array>
+        <item>@string/preferences_front_light_on</item>
+        <item>@string/preferences_front_light_auto</item>
+        <item>@string/preferences_front_light_off</item>
+    </string-array>
     <string-array name="preferences_front_light_values" ns1:ignore="MissingTranslation">
-    <item>ON</item>
-    <item>AUTO</item>
-    <item>OFF</item>
-  </string-array>
+        <item>ON</item>
+        <item>AUTO</item>
+        <item>OFF</item>
+    </string-array>
     <color name="actionbar_bg">#aa262626</color>
     <color name="actionbar_text">#ffffffff</color>
     <color name="colorAccent">#FF4081</color>
@@ -202,13 +202,13 @@
     <string name="scan_success_string">Codigo detectado...</string>
     <string name="wifi_changing_network">Requesting connection to network\u2026</string>
     <style name="CaptureTheme" parent="Theme.AppCompat.NoActionBar">
-    <item name="android:windowFullscreen">true</item>
-    <item name="android:windowContentOverlay">@null</item>
-    <item name="android:windowActionBarOverlay">true</item>
-    <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowActionModeOverlay">true</item>
 
-      <item name="colorPrimary">@color/colorPrimary</item>
-      <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-      <item name="colorAccent">@color/colorAccent</item>
-  </style>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
 </resources>
