@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\res\\merged\\debug\\layout-land\\encode.xml",
+        "source": "C:\\projects\\CameraWebView01\\zxing-orient\\src\\main\\res\\layout-land\\encode.xml"
+    },
+    {
+        "merged": "C:\\projects\\CameraWebView01\\zxing-orient\\build\\intermediates\\res\\merged\\debug\\layout-land\\capture.xml",
+        "source": "C:\\projects\\CameraWebView01\\zxing-orient\\src\\main\\res\\layout-land\\capture.xml"
+    }
+]

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3">
+    <dataSet config="main">
+        <source path="C:\projects\CameraWebView01\zxing-orient\src\main\jniLibs" />
+    </dataSet>
+    <dataSet config="release">
+        <source path="C:\projects\CameraWebView01\zxing-orient\src\release\jniLibs" />
+    </dataSet>
+</merger>

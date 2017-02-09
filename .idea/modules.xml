@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CameraWebView01.iml" filepath="$PROJECT_DIR$/CameraWebView01.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zxing-orient/zxing-orient.iml" filepath="$PROJECT_DIR$/zxing-orient/zxing-orient.iml" />
     </modules>
   </component>
 </project>

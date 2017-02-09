@@ -35,6 +35,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import me.sudar.zxingorient.Barcode;
 import me.sudar.zxingorient.ZxingOrient;
 import me.sudar.zxingorient.ZxingOrientResult;
 
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     //creamos la constante de direccion web
     //Prueba: private static final String URL_WEB = "http://www.google.es";
     private String url;
+    private ZxingOrient scanner;
     private String scanContentResut;
     private String scanFormatResut;
 
@@ -105,8 +107,13 @@ public class MainActivity extends AppCompatActivity {
             /*Si se ha pulsado el boton de escanear codigo de barras, se hace uso de la
             libreria zxing para lanzar el escaner*/
             case STATE_SCAN:
-                //TODO: Cambiar la libreria de Zxing por la propia barcodescan para poder modificar la libreria
-                new ZxingOrient(MainActivity.this).setBeep(true).initiateScan();
+                //se edita el layout del scanner
+                scanner = new ZxingOrient(MainActivity.this);
+                scanner.setToolbarColor("#1c1c1c");
+                scanner.setIcon(R.drawable.ic_barcode_scan);
+                scanner.setInfo("Pulsa ATRÁS para cancelar");
+                scanner.setInfoBoxColor("#1c1c1c");
+                scanner.setBeep(true).initiateScan(Barcode.ONE_D_CODE_TYPES, -1);
                 break;
             default:
                 webView.loadUrl(WEB_HOME);
