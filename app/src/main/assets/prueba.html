@@ -102,10 +102,6 @@
 
 <script type="text/javascript">
 
-            function checkInfo(){
-              document.getElementById("demo").innerHTML = "Guardado: Posición leída"
-            }
-
             function myInfoFunction() {
 				if(document.querySelector(".info")){
 				document.getElementById("id_info").classList.remove("info");
@@ -172,10 +168,6 @@
             function dialogScanCode(){
               if(document.form1.name_keytext.value != ""){
                   scan_code = document.form1.name_keytext.value
-              }else if(document.form1.name_numberkey.value != ""){
-                  scan_code = document.form1.name_numberkey.value
-              }else if(document.form1.name_numberscan.value != ""){
-                  scan_code = document.form1.name_numberscan.value
               }else{
                   scan_code = "Codigo no valido"
               }
@@ -209,10 +201,6 @@
             if(!("autofocus" in document.createElement("input")))
                 document.getElementById("id_scan").focus();
                 Android.scanBarcode()
-            }
-
-            function hasClass(element, cls) {
-                return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1
             }
 
             $.mobile.pushStateEnabled = false
