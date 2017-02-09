@@ -19,8 +19,17 @@
 </head>
 <body onload="myTestFunction()">
 
+<audio id="id_beepError">
+    <source src="beepError.wav" type="audio/wav">
+    Your browser does not support the audio element.
+</audio>
+<audio id="id_beepOk">
+    <source src="beepOk.wav" type="audio/wav">
+    Your browser does not support the audio element.
+</audio>
+
 <div data-role="page" id="pageone">
-    <div data-role="header" style=background-color:red>
+    <div data-role="header">
         <h1>APP BROWSER</h1>
     </div>
 
@@ -52,7 +61,7 @@
             </div>
             <div data-role="fieldcontain">
                 <label id="id_infolabel">Prueba clase Info</label>
-                <input id="id_info" type="text" name="name_infoText"
+                <input class="info" id="id_info" type="text" name="name_infoText"
                        value="Escanee Posición" onfocus="myInfoFunction()">
                 <input id="id_error" type="text" name="name_errorText"
                        value="Posición inválida" onfocus="myErrorFunction()">
@@ -117,13 +126,15 @@
 			  if(document.querySelector(".info")){
               info = document.getElementById("id_info").value;
               document.getElementById("demo").innerHTML = "Guardado: "+info;
+			  document.getElementById("id_beepOk").play(); 
 			  } else if(document.querySelector(".error")){
+			  document.getElementById("id_beepError").play(); 
               error = document.getElementById("id_error").value;
               document.getElementById("demo").innerHTML = "Error. " + error;
 			  }else{
 				document.getElementById("demo").innerHTML = "No existe ninguna clase";
 			  }
-			}			
+			}
 			
             function keySwitch() {
 				if(document.querySelector(".number")){

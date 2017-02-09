@@ -135,6 +135,8 @@ public class MainActivity extends AppCompatActivity {
         //añadimos scroll
         webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
         webView.setScrollbarFadingEnabled(false);
+        //habilitamos el uso de mediaplayer sin gestos
+        webView.getSettings().setMediaPlaybackRequiresUserGesture(false);
         //habilitamos las opciones de zoom
         webView.getSettings().setSupportZoom(true);
         webView.getSettings().setBuiltInZoomControls(true);
