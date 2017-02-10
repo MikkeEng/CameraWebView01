@@ -7,8 +7,8 @@ android {
         applicationId "com.mengroba.camerawebview01"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 346
-        versionName "3.46"
+        versionCode 352
+        versionName "3.52"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

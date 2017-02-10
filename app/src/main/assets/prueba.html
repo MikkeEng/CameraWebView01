@@ -131,7 +131,7 @@
 				document.getElementById("demo").innerHTML = "No existe ninguna clase";
 			  }
 			}
-			
+
             function keySwitch() {
 				if(document.querySelector(".scan_number")){
 				document.getElementById("id_keytext").classList.remove("scan_number");
@@ -146,7 +146,7 @@
 				document.getElementById("id_keytext").classList.remove("number");
 				document.getElementById("id_keytext").classList.add("scan_number");
 				document.getElementById("id_keytext").type = "number";
-                document.getElementById("key").innerHTML = "Escanea el codigo";
+                document.getElementById("key").innerHTML = "Modo escaneo seleccionado";
                 scanBarcode();
 				}else{
 				document.getElementById("id_keytext").classList.remove("scan_number");

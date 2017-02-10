@@ -405,13 +405,23 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(scanFormatResut);*/
                 //Pasamos la informacion al usuario, para ello usamos un dialogo emergente
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("Dialog Android:" + "\n" + "El formato es: " + scanFormatResut + "\n" +
+                builder
+                        .setMessage("El formato es: " + scanFormatResut + "\n" +
                         "y el codigo es: " + scanContentResut)
-                        .setNeutralButton("Aceptar", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Guardar codigo", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int id) {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(MainActivity.this, "Guardando codigo", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
-                                finish();  //Este finish es para cerrar la Activity generada por el scanner
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(MainActivity.this, "Cancelando operación...", Toast.LENGTH_LONG).show();
+                                dialog.dismiss();
+                                finish();
                             }
                         });
                 //Creamos el dialogo
